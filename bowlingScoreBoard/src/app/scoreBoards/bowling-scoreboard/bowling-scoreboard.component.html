@@ -1,0 +1,30 @@
+ <h1 class="title">Bowling Score Card</h1>
+
+ <div *ngFor="let frame of frames; let i = index" style="border-style: solid; width:10%; float:left">
+    <div>Frame {{i + 1}}</div>
+    <div>
+        Roll 1: {{frame.rollOne}}
+    </div>
+    <div>
+        Roll 2: {{frame.isSpare? '/' : frame.rollTwo}}
+    </div>
+    <div>
+        Roll 3: {{frame.rollThree}}
+    </div>
+    <div>
+        Total : {{frame.grandTotal}}
+    </div>
+
+</div>
+
+<div *ngIf="!gameFinished" id="buttons" class="buttons" style="clear: left;">
+    Pins Hit:
+    <button type="button" (click)="rollPin(0)"  class="btn btn-primary">Gutter</button>
+    <button type="button" *ngFor="let button of buttons" [disabled]="button.disabled" (click)="rollPin(button.value)"  class="btn btn-primary">{{button.value}}</button>
+    <button type="button" [disabled]="!enableSpar" (click)="rollPin('/')"  class="btn btn-primary">/</button>
+    <button type="button" [disabled]="enableSpar" (click)="rollPin('X')"  class="btn btn-primary">X</button>
+</div>
+
+<div>
+    <button type="button" (click)="newGame()"  class="btn btn-primary">New Game</button>
+</div>
