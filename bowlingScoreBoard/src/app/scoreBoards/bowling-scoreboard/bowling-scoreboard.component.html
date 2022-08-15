@@ -1,30 +1,60 @@
- <h1 class="title">Bowling Score Card</h1>
+ <div class="container-fluid card" style="width: 80%;">
+   <div class="row align-items-start" *ngIf="frames.length >0">
+     <div *ngFor="let frame of frames; let i = index" class="card" style="width:10%; min-height: 260px;">
+       <div class="card-body" *ngIf="i !== 9; else frameTen">
+         <div class="card-title frame-text">Frame {{i + 1}}</div>
+         <div *ngIf="!frame.isStrike; else strikeFrame">
+           <ul class="list-group list-group-flush">
+             <li class="list-group-item">Roll 1: {{frame.rollOne}}</li>
+             <li class="list-group-item">Roll 2: {{frame.isSpare? '/' : frame.rollTwo}}</li>
+           </ul>
+         </div>
+         <ng-template #strikeFrame>
+           <ul class="list-group list-group-flush">
+             <li class="list-group-item">X</li>
+           </ul>
+         </ng-template>
+         <div class="card-header fs-13">
+           Total : {{frame.grandTotal}}
+         </div>
+       </div>
+       <ng-template #frameTen>
+         <div class="card-body">
+           <div class="card-title frame-text">Frame {{i + 1}}</div>
+           <div>
+             <ul class="list-group list-group-flush">
+               <li class="list-group-item">Roll 1: {{frame.rollOne === 10 ? 'X' : frame.rollOne}}</li>
+               <li class="list-group-item">Roll 2:
+                 {{frame.rollTwo === 10 ? 'X' : (frame.rollOne + frame.rollTwo === 10)? '/' : frame.rollTwo}}</li>
+               <li class="list-group-item">Roll 3:
+                 {{frame.rollThree === 10 ? 'X' : (frame.rollTwo + frame.rollThree === 10)? '/' : frame.rollThree}}</li>
+             </ul>
+           </div>
+           <div class="card-header fs-13">
+             Total : {{frame.grandTotal}}
+           </div>
+         </div>
+       </ng-template>
+     </div>
+   </div>
+   <div *ngIf="frames.length ===0" class="center" style="height: 200px;">
+     <h5>Roll Pins to Start</h5>
+     <!-- the image used is free to use; link : https://www.pexels.com/creative-commons-images/ -->
+     <img src="https://images.pexels.com/photos/4192/sport-alley-ball-game.jpg?cs=srgb&dl=pexels-skitterphoto-4192.jpg&fm=jpg" class="rounded mx-auto d-block" alt="img">
+   </div>
+   <div id="buttons" class="p-2 d-flex " style="clear: left;">
+     <div *ngIf="!gameFinished" class="center row">
+       <span>Pins Hit:</span>
+       <button type="button" (click)="rollPin(0)" class="btn btn-primary col">Gutter</button>
+       <button type="button" *ngFor="let button of buttons" [disabled]="button.disabled" (click)="rollPin(button.value)"
+         class="btn btn-primary col">{{button.value}}</button>
+       <button type="button" [disabled]="!enableSpar" (click)="rollPin('/')" class="btn btn-primary col">/</button>
+       <button type="button" [disabled]="enableSpar" (click)="rollPin('X')" class="btn btn-primary col">X</button>
+     </div>
+     <div *ngIf="gameFinished" class="center row">
+        <strong>Total Score: {{totalScore}}</strong>
+      </div>
+   </div>
+   <button *ngIf="frames.length !==0" type="button" (click)="newGame()" class="btn btn-primary row center ng-btn" >New Game</button>
 
- <div *ngFor="let frame of frames; let i = index" style="border-style: solid; width:10%; float:left">
-    <div>Frame {{i + 1}}</div>
-    <div>
-        Roll 1: {{frame.rollOne}}
-    </div>
-    <div>
-        Roll 2: {{frame.isSpare? '/' : frame.rollTwo}}
-    </div>
-    <div>
-        Roll 3: {{frame.rollThree}}
-    </div>
-    <div>
-        Total : {{frame.grandTotal}}
-    </div>
-
-</div>
-
-<div *ngIf="!gameFinished" id="buttons" class="buttons" style="clear: left;">
-    Pins Hit:
-    <button type="button" (click)="rollPin(0)"  class="btn btn-primary">Gutter</button>
-    <button type="button" *ngFor="let button of buttons" [disabled]="button.disabled" (click)="rollPin(button.value)"  class="btn btn-primary">{{button.value}}</button>
-    <button type="button" [disabled]="!enableSpar" (click)="rollPin('/')"  class="btn btn-primary">/</button>
-    <button type="button" [disabled]="enableSpar" (click)="rollPin('X')"  class="btn btn-primary">X</button>
-</div>
-
-<div>
-    <button type="button" (click)="newGame()"  class="btn btn-primary">New Game</button>
-</div>
+ </div>
