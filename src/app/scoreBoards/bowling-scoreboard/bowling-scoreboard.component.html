@@ -27,7 +27,7 @@
                <li class="list-group-item">Roll 2:
                  {{frame.rollTwo === 10 ? 'X' : (frame.rollOne + frame.rollTwo === 10)? '/' : frame.rollTwo}}</li>
                <li class="list-group-item">Roll 3:
-                 {{frame.rollThree === 10 ? 'X' : (frame.rollTwo + frame.rollThree === 10)? '/' : frame.rollThree}}</li>
+                 {{frame.rollThree === 10 ? 'X' : (frame.rollOne + frame.rollTwo !== 10 && frame.rollTwo + frame.rollThree === 10)? '/' : frame.rollThree}}</li>
              </ul>
            </div>
            <div class="card-header fs-13">
