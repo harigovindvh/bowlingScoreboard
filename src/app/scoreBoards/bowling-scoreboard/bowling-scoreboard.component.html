@@ -1,6 +1,6 @@
- <div class="container-fluid card" style="width: 80%;">
+ <div class="container-fluid card container-card">
    <div class="row align-items-start" *ngIf="frames.length >0">
-     <div *ngFor="let frame of frames; let i = index" class="card" style="width:10%; min-height: 260px;">
+     <div *ngFor="let frame of frames; let i = index" class="card card-custom">
        <div class="card-body" *ngIf="i !== 9; else frameTen">
          <div class="card-title frame-text">Frame {{i + 1}}</div>
          <div *ngIf="!frame.isStrike; else strikeFrame">
@@ -40,7 +40,9 @@
    <div *ngIf="frames.length ===0" class="center" style="height: 200px;">
      <h5>Roll Pins to Start</h5>
      <!-- the image used is free to use; link : https://www.pexels.com/creative-commons-images/ -->
-     <img src="https://images.pexels.com/photos/4192/sport-alley-ball-game.jpg?cs=srgb&dl=pexels-skitterphoto-4192.jpg&fm=jpg" class="rounded mx-auto d-block" alt="img">
+     <img
+       src="https://images.pexels.com/photos/4192/sport-alley-ball-game.jpg?cs=srgb&dl=pexels-skitterphoto-4192.jpg&fm=jpg"
+       class="rounded mx-auto d-block" alt="img">
    </div>
    <div id="buttons" class="p-2 d-flex " style="clear: left;">
      <div *ngIf="!gameFinished" class="center row">
@@ -52,9 +54,21 @@
        <button type="button" [disabled]="enableSpar" (click)="rollPin('X')" class="btn btn-primary col">X</button>
      </div>
      <div *ngIf="gameFinished" class="center row">
-        <strong>Total Score: {{totalScore}}</strong>
-      </div>
+       <strong>Total Score: {{totalScore}}</strong>
+     </div>
    </div>
-   <button *ngIf="frames.length !==0" type="button" (click)="newGame()" class="btn btn-primary row center ng-btn" >New Game</button>
-
+   <button *ngIf="frames.length !==0" type="button" (click)="newGame()" class="btn btn-primary row center ng-btn">New
+     Game</button>
+   <div>
+     <div class="card center custom-card">
+       <div class="card-body">
+         <h6 class="card-title">How to Play?</h6>
+         <p class="card-text">Push the buttons to see the values for each throw in a frame. After each input, the
+           calculator updates your score and only allows you to use the buttons you are capable of pressing. To strike,
+           press "X," and to spare, "/." By clicking the "new game" option, you can restart the game at any time. Please
+           be aware that your score is not saved, thus reloading the page could result in losing it.</p>
+         <a href="https://en.wikipedia.org/wiki/Ten-pin_bowling" class="card-link">Read more on Wikipedia</a>
+       </div>
+     </div>
+   </div>
  </div>

@@ -16,6 +16,26 @@
   border-bottom-width: 1px;
 }
 
+.custom-card {
+  width: 30rem; 
+  margin-top: 5px; 
+  margin-bottom:5px; 
+  p {
+    text-align: justify;
+    font-size: small;
+  }
+}
+
+.container-card {
+  width: 80%; 
+  margin-top: 10px;
+}
+
+.card-custom {
+  width:10%; 
+  min-height: 260px;
+}
+
 .ng-btn{
   width: 20%;
 }
