@@ -1,7 +1,7 @@
  <div class="container-fluid card container-card">
    <div class="row align-items-start" *ngIf="frames.length >0">
      <div *ngFor="let frame of frames; let i = index" class="card card-custom">
-       <div class="card-body" *ngIf="i !== 9; else frameTen">
+       <div class="card-body" *ngIf="i !== 9; else frameTen" style="padding: 0;padding-top: 5px;">
          <div class="card-title frame-text">Frame {{i + 1}}</div>
          <div *ngIf="!frame.isStrike; else strikeFrame">
            <ul class="list-group list-group-flush">
@@ -19,7 +19,7 @@
          </div>
        </div>
        <ng-template #frameTen>
-         <div class="card-body">
+         <div class="card-body" style="padding: 0;padding-top: 5px;">
            <div class="card-title frame-text">Frame {{i + 1}}</div>
            <div>
              <ul class="list-group list-group-flush">
